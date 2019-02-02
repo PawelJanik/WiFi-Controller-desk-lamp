@@ -194,9 +194,9 @@ void loop()
 	{
 		reconnect();
 
-		if(digitalRead(D5) != switchState)
+		if(digitalRead(5) != switchState)
 		{
-			switchState = digitalRead(D5);
+			switchState = digitalRead(5);
 
 
 			if(lightState == false)
