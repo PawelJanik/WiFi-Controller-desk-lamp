@@ -243,16 +243,22 @@ void loop()
 
 	if(digitalRead(5) != switchState)
 	{
-		switchState = digitalRead(5);
+		delay(1);
+
+		if(digitalRead(5) != switchState)
+		{
+
+			switchState = digitalRead(5);
 
 
-		if(lightState == false)
-		{
-			client.publish("home/sensors/switch/1", "1");
-		}
-		else
-		{
-			client.publish("home/sensors/switch/1", "0");
+			if(lightState == false)
+			{
+				client.publish("home/sensors/switch/1", "1");
+			}
+			else
+			{
+				client.publish("home/sensors/switch/1", "0");
+			}
 		}
 	}
 }
