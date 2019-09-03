@@ -67,6 +67,7 @@ void reconnect()
 		client.subscribe("home/myRoom/light/0/speed");
 
 		client.subscribe("home/controllers/2/restart");
+		client.subscribe("home/controllers/2/sleep");
 
 		digitalWrite(1, HIGH);
 	}
@@ -162,6 +163,17 @@ void callback(char * topic, byte* payload, unsigned int length)
 			digitalWrite(1, LOW);
 			digitalWrite(3, LOW);
 			ESP.restart();
+		}
+	}
+
+	if(strcmp(topic,"home/controllers/2/sleep")==0)
+	{
+		if((char)payload[0] == 's')
+		{
+			client.publish("home/controllers/2/condition", "sleep");
+			delay(500);
+
+			//ESP.deepSleep(30e6, RF_DEFAULT);
 		}
 	}
 }
